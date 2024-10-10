@@ -25,3 +25,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/furnitureRoute.php';
+require __DIR__.'/electronicsRoute.php';
+require __DIR__.'/booksRoute.php';
+require __DIR__.'/manufacturersRoute.php';
+require __DIR__.'/office_suppliesRoute.php';
+require __DIR__.'/statusesRoute.php';
+require __DIR__.'/softwareRoute.php';
+require __DIR__.'/locationRoute.php';
