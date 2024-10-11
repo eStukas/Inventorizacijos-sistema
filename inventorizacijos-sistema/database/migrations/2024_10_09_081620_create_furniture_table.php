@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('manufacturer_provider');
             $table->string('status');
-            $table->string('acquisition_date');
+            $table->date('acquisition_date');
             $table->timestamps();
         });
     }
