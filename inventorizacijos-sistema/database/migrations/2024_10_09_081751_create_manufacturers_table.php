@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('email');
-            $table->text('contact_number');
+            $table->string('name');
+            $table->string('email');
+            $table->string('contact_number');
             $table->timestamps();
         });
     }
