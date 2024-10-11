@@ -12,7 +12,8 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        //
+        $manufacturer = Manufacturer::all();
+        return response()->json($manufacturer);
     }
 
     /**
@@ -28,7 +29,15 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'contact_number' => 'required|string|max:255'
+        ]);
+
+        $manufacturer = Manufacturer::create($validated);
+
+        return response()->json($manufacturer, 201);
     }
 
     /**
@@ -36,7 +45,8 @@ class ManufacturerController extends Controller
      */
     public function show(Manufacturer $manufacturers)
     {
-        //
+        return response()->json($manufacturers);
+
     }
 
     /**
@@ -52,7 +62,15 @@ class ManufacturerController extends Controller
      */
     public function update(Request $request, Manufacturer $manufacturers)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'contact_number' => 'required|string|max:255'
+        ]);
+
+        $manufacturers->update($validated);
+
+        return response()->json($manufacturers);
     }
 
     /**
@@ -60,6 +78,8 @@ class ManufacturerController extends Controller
      */
     public function destroy(Manufacturer $manufacturers)
     {
-        //
+        $manufacturers->delete();
+
+        return response()->json(['message' => 'Manufacturer has been deleted successfully!']);
     }
 }

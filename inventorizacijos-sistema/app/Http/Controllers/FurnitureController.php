@@ -12,7 +12,8 @@ class FurnitureController extends Controller
      */
     public function index()
     {
-        //
+        $furniture = Furniture::all();
+        return response()->json($furniture);
     }
 
     /**
@@ -28,7 +29,16 @@ class FurnitureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'manufacturer_provider' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'acquisition_date' => 'required|date'
+        ]);
+
+        $furniture = Furniture::create($validated);
+
+        return response()->json($furniture, 201);
     }
 
     /**
@@ -36,7 +46,7 @@ class FurnitureController extends Controller
      */
     public function show(Furniture $furniture)
     {
-        //
+        return response()->json($furniture);
     }
 
     /**
@@ -52,7 +62,18 @@ class FurnitureController extends Controller
      */
     public function update(Request $request, Furniture $furniture)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'manufacturer_provider' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'acquisition_date' => 'required|date'
+        ]);
+
+        // Update the furniture item
+        $furniture->update($validated);
+
+        // Return the updated furniture as JSON
+        return response()->json($furniture);
     }
 
     /**
@@ -60,6 +81,8 @@ class FurnitureController extends Controller
      */
     public function destroy(Furniture $furniture)
     {
-        //
+        $furniture->delete();
+
+        return response()->json(['message' => 'Furniture has been deleted successfully!']);
     }
 }

@@ -12,7 +12,8 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $location = Location::all();
+        return response()->json($location);
     }
 
     /**
@@ -28,7 +29,16 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'user' => '',
+            
+        ]);
+
+        $location = Location::create($validated);
+
+        return response()->json($location, 201);
     }
 
     /**
@@ -36,7 +46,7 @@ class LocationController extends Controller
      */
     public function show(Location $locations)
     {
-        //
+        return response()->json($locations);
     }
 
     /**
@@ -52,7 +62,16 @@ class LocationController extends Controller
      */
     public function update(Request $request, Location $locations)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'user' => '',
+            
+        ]);
+
+        $locations->update($validated);
+
+        return response()->json($locations);
     }
 
     /**
@@ -60,6 +79,8 @@ class LocationController extends Controller
      */
     public function destroy(Location $locations)
     {
-        //
+        $locations->delete();
+
+        return response()->json(['message' => 'Locations have been deleted successfully!']);
     }
 }

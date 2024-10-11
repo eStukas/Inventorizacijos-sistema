@@ -12,7 +12,8 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-        //
+        $software = Software::all();
+        return response()->json($software);
     }
 
     /**
@@ -28,7 +29,18 @@ class SoftwareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'software_type_id' => '',
+            'manufacturer_id' => '',
+            'status_id' => '',
+            'purchase_date' => 'required|date',
+            'valid_until' => 'required|date',
+            'amount' => 'required|integer'
+        ]);
+
+        $software = Software::create($validated);
+
+        return response()->json($software, 201);
     }
 
     /**
@@ -36,7 +48,7 @@ class SoftwareController extends Controller
      */
     public function show(Software $software)
     {
-        //
+        return response()->json($software);
     }
 
     /**
@@ -52,7 +64,18 @@ class SoftwareController extends Controller
      */
     public function update(Request $request, Software $software)
     {
-        //
+        $validated = $request->validate([
+            'software_type_id' => '',
+            'manufacturer_id' => '',
+            'status_id' => '',
+            'purchase_date' => 'required|date',
+            'valid_until' => 'required|date',
+            'amount' => 'required|integer'
+        ]);
+
+        $software->update($validated);
+
+        return response()->json($software);
     }
 
     /**
@@ -60,6 +83,8 @@ class SoftwareController extends Controller
      */
     public function destroy(Software $software)
     {
-        //
+        $software->delete();
+
+        return response()->json(['message' => 'Software has been deleted successfully!']);
     }
 }

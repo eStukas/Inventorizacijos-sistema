@@ -12,7 +12,8 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        $status = Status::all();
+        return response()->json($status);
     }
 
     /**
@@ -28,7 +29,15 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'notes' => 'required|string|max:255',
+            'status_color' => 'required|string|max:255'
+        ]);
+        
+        $status = Status::create($validated);
+
+        return response()->json($status, 201);
     }
 
     /**
@@ -36,7 +45,7 @@ class StatusController extends Controller
      */
     public function show(Status $statuses)
     {
-        //
+        return response()->json($statuses);
     }
 
     /**
@@ -52,7 +61,15 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $statuses)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'notes' => 'required|string|max:255',
+            'status_color' => 'required|string|max:255'
+        ]);
+
+        $statuses->update($validated);
+
+        return response()->json($statuses);
     }
 
     /**
@@ -60,6 +77,8 @@ class StatusController extends Controller
      */
     public function destroy(Status $statuses)
     {
-        //
+        $statuses->delete();
+
+        return response()->json(['message' => 'Status has been deleted successfully!']);
     }
 }

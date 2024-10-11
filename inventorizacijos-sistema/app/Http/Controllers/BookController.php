@@ -12,7 +12,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $book = Book::all();
+        return response()->json($book);
     }
 
     /**
@@ -28,7 +29,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'release_date' => 'required|date',
+            'location' => '',
+            'acquisition_date' => 'required|date'
+        ]);
+
+        $book = Book::create($validated);
+
+        return response()->json($book, 201);
     }
 
     /**
@@ -36,7 +48,7 @@ class BookController extends Controller
      */
     public function show(Book $books)
     {
-        //
+        return response()->json($books);
     }
 
     /**
@@ -52,7 +64,18 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $books)
     {
-        //
+        $validated = $request->validate([
+            'type' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'release_date' => 'required|date',
+            'location' => '',
+            'acquisition_date' => 'required|date'
+        ]);
+
+        $books->update($validated);
+
+        return response()->json($books);
     }
 
     /**
@@ -60,6 +83,8 @@ class BookController extends Controller
      */
     public function destroy(Book $books)
     {
-        //
+        $books->delete();
+
+        return response()->json(['message' => 'Book has been deleted successfully!']);
     }
 }
