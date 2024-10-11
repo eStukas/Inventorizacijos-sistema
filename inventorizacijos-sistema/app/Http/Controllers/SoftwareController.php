@@ -30,9 +30,9 @@ class SoftwareController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'software_type_id' => '',
-            'manufacturer_id' => '',
-            'status_id' => '',
+            'software_type_id' => 'required|exists:software_types,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'status_id' => 'required|exists:statuses,id',
             'purchase_date' => 'required|date',
             'valid_until' => 'required|date',
             'amount' => 'required|integer'
@@ -65,9 +65,9 @@ class SoftwareController extends Controller
     public function update(Request $request, Software $software)
     {
         $validated = $request->validate([
-            'software_type_id' => '',
-            'manufacturer_id' => '',
-            'status_id' => '',
+            'software_type_id' => 'required|exists:software_types,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'status_id' => 'required|exists:statuses,id',
             'purchase_date' => 'required|date',
             'valid_until' => 'required|date',
             'amount' => 'required|integer'

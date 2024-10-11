@@ -32,9 +32,9 @@ class ElectronicsController extends Controller
         $validated = $request->validate([
             'inv_code' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'manufacturers' => '',
+            'manufacturers' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
-            'location' => '',
+            'location' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
         ]);
@@ -68,9 +68,9 @@ class ElectronicsController extends Controller
         $validated = $request->validate([
             'inv_code' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'manufacturers' => '',
+            'manufacturers' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
-            'location' => '',
+            'location' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
         ]);

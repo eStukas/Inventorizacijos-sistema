@@ -34,7 +34,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'location' => '',
+            'location' => 'required|exists:locations,id',
             'acquisition_date' => 'required|date'
         ]);
 
@@ -69,7 +69,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'location' => '',
+            'location' => 'required|exists:locations,id',
             'acquisition_date' => 'required|date'
         ]);
 

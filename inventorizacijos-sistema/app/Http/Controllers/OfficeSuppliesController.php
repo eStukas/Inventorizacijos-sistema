@@ -31,7 +31,7 @@ class OfficeSuppliesController extends Controller
     {
         $validated = $request->validate([
             'type' => 'required|string|max:255',
-            'manufacturer' => '',
+            'manufacturer' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
             'acquisition_date' => 'required|date'
         ]);
@@ -64,7 +64,7 @@ class OfficeSuppliesController extends Controller
     {
         $validated = $request->validate([
             'type' => 'required|string|max:255',
-            'manufacturer' => '',
+            'manufacturer' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
             'acquisition_date' => 'required|date'
         ]);
