@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Furniture;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FurnitureController extends Controller
 {
@@ -13,7 +14,8 @@ class FurnitureController extends Controller
     public function index()
     {
         $furniture = Furniture::all();
-        return response()->json($furniture);
+        return Inertia::render('Furniture/FurnitureIndex', ['furniture' => $furniture]);
+
     }
 
     /**
@@ -21,7 +23,7 @@ class FurnitureController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Furniture/FurnitureAdd');
     }
 
     /**
@@ -38,7 +40,7 @@ class FurnitureController extends Controller
 
         $furniture = Furniture::create($validated);
 
-        return response()->json($furniture, 201);
+        return Inertia::render('Furniture/FurnitureIndex');
     }
 
     /**
@@ -46,7 +48,7 @@ class FurnitureController extends Controller
      */
     public function show(Furniture $furniture)
     {
-        return response()->json($furniture);
+        //return response()->json($furniture);
     }
 
     /**
@@ -54,7 +56,7 @@ class FurnitureController extends Controller
      */
     public function edit(Furniture $furniture)
     {
-        //
+        return Inertia::render('Furniture/FurnitureEdit');
     }
 
     /**
@@ -73,7 +75,7 @@ class FurnitureController extends Controller
         $furniture->update($validated);
 
         // Return the updated furniture as JSON
-        return response()->json($furniture);
+        return Inertia::render('Furniture/FurnitureIndex');
     }
 
     /**
@@ -83,6 +85,6 @@ class FurnitureController extends Controller
     {
         $furniture->delete();
 
-        return response()->json(['message' => 'Furniture has been deleted successfully!']);
+        return redirect()->route('furniture.index')->with('success', 'Furniture deleted successfully.');
     }
 }

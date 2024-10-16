@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Software;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SoftwareController extends Controller
 {
@@ -13,7 +14,7 @@ class SoftwareController extends Controller
     public function index()
     {
         $software = Software::all();
-        return response()->json($software);
+        return Inertia::render('Software/SoftwareIndex', ['software' => $software]);
     }
 
     /**
@@ -21,7 +22,7 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Software/SoftwareAdd');
     }
 
     /**
@@ -40,7 +41,7 @@ class SoftwareController extends Controller
 
         $software = Software::create($validated);
 
-        return response()->json($software, 201);
+        return Inertia::render('Software/SoftwareIndex');
     }
 
     /**
@@ -48,7 +49,7 @@ class SoftwareController extends Controller
      */
     public function show(Software $software)
     {
-        return response()->json($software);
+        //return response()->json($software);
     }
 
     /**
@@ -56,7 +57,7 @@ class SoftwareController extends Controller
      */
     public function edit(Software $software)
     {
-        //
+        return Inertia::render('Software/SoftwareEdit');
     }
 
     /**
@@ -75,7 +76,7 @@ class SoftwareController extends Controller
 
         $software->update($validated);
 
-        return response()->json($software);
+        return Inertia::render('Software/SoftwareIndex');
     }
 
     /**
@@ -85,6 +86,6 @@ class SoftwareController extends Controller
     {
         $software->delete();
 
-        return response()->json(['message' => 'Software has been deleted successfully!']);
+        return redirect()->route('software.index')->with('success', 'Software deleted successfully.');
     }
 }

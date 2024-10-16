@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+
 
 class ManufacturerController extends Controller
 {
@@ -13,7 +15,7 @@ class ManufacturerController extends Controller
     public function index()
     {
         $manufacturer = Manufacturer::all();
-        return response()->json($manufacturer);
+        return Inertia::render('Manufacturer/ManufacturerIndex', ['manufacturer' => $manufacturer]);
     }
 
     /**
@@ -21,7 +23,7 @@ class ManufacturerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Manufacturer/ManufacturerAdd');
     }
 
     /**
@@ -37,7 +39,7 @@ class ManufacturerController extends Controller
 
         $manufacturer = Manufacturer::create($validated);
 
-        return response()->json($manufacturer, 201);
+        return Inertia::render('Manufacturer/ManufacturerIndex');
     }
 
     /**
@@ -45,7 +47,7 @@ class ManufacturerController extends Controller
      */
     public function show(Manufacturer $manufacturers)
     {
-        return response()->json($manufacturers);
+        //return response()->json($manufacturers);
 
     }
 
@@ -54,7 +56,7 @@ class ManufacturerController extends Controller
      */
     public function edit(Manufacturer $manufacturers)
     {
-        //
+        return Inertia::render('Manufacturer/ManufacturerEdit');
     }
 
     /**
@@ -70,7 +72,7 @@ class ManufacturerController extends Controller
 
         $manufacturers->update($validated);
 
-        return response()->json($manufacturers);
+        return Inertia::render('Manufacturer/ManufacturerIndex');
     }
 
     /**
@@ -80,6 +82,6 @@ class ManufacturerController extends Controller
     {
         $manufacturers->delete();
 
-        return response()->json(['message' => 'Manufacturer has been deleted successfully!']);
+        return redirect()->route('manufacturer.index')->with('success', 'Manufacturer deleted successfully.');
     }
 }

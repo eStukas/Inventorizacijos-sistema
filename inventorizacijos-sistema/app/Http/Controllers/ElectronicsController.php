@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Electronics;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ElectronicsController extends Controller
 {
@@ -13,7 +14,7 @@ class ElectronicsController extends Controller
     public function index()
     {
         $electronics = Electronics::all();
-        return response()->json($electronics);
+        return Inertia::render('Electronics/ElectronicsIndex', ['electronics' => $electronics]);
     }
 
     /**
@@ -21,7 +22,7 @@ class ElectronicsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Electronics/ElectronicsAdd');
     }
 
     /**
@@ -32,16 +33,16 @@ class ElectronicsController extends Controller
         $validated = $request->validate([
             'inv_code' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'manufacturers' => 'required|exists:manufacturers,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
-            'location' => 'required|exists:locations,id',
+            'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
         ]);
 
         $electronics = Electronics::create($validated);
 
-        return response()->json($electronics, 201);
+        return Inertia::render('Electronics/ElectronicsIndex');
     }
 
     /**
@@ -49,7 +50,7 @@ class ElectronicsController extends Controller
      */
     public function show(Electronics $electronics)
     {
-        return response()->json($electronics);
+        //return response()->json($electronics);
     }
 
     /**
@@ -57,7 +58,7 @@ class ElectronicsController extends Controller
      */
     public function edit(Electronics $electronics)
     {
-        //
+        return Inertia::render('Electronics/ElectronicsEdit');
     }
 
     /**
@@ -68,17 +69,16 @@ class ElectronicsController extends Controller
         $validated = $request->validate([
             'inv_code' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'manufacturers' => 'required|exists:manufacturers,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
-            'location' => 'required|exists:locations,id',
+            'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
         ]);
 
         $electronics->update($validated);
 
-        return response()->json($electronics);
-
+        return Inertia::render('Electronics/ElectronicsIndex');
     }
 
     /**
@@ -88,6 +88,6 @@ class ElectronicsController extends Controller
     {
         $electronics->delete();
 
-        return response()->json(['message' => 'Electronics have been deleted successfully!']);
+        return redirect()->route('electronics.index')->with('success', 'Electronics deleted successfully.');
     }
 }

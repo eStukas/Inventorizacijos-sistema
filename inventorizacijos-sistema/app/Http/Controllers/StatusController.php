@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class StatusController extends Controller
 {
@@ -13,7 +14,7 @@ class StatusController extends Controller
     public function index()
     {
         $status = Status::all();
-        return response()->json($status);
+        return Inertia::render('Status/StatusIndex', ['status' => $status]);
     }
 
     /**
@@ -21,7 +22,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Status/StatusAdd');
     }
 
     /**
@@ -37,7 +38,7 @@ class StatusController extends Controller
         
         $status = Status::create($validated);
 
-        return response()->json($status, 201);
+        return Inertia::render('Status/StatusIndex');
     }
 
     /**
@@ -45,7 +46,7 @@ class StatusController extends Controller
      */
     public function show(Status $statuses)
     {
-        return response()->json($statuses);
+        //return response()->json($statuses);
     }
 
     /**
@@ -53,7 +54,7 @@ class StatusController extends Controller
      */
     public function edit(Status $statuses)
     {
-        //
+        return Inertia::render('Status/StatusEdit');
     }
 
     /**
@@ -69,7 +70,7 @@ class StatusController extends Controller
 
         $statuses->update($validated);
 
-        return response()->json($statuses);
+        return Inertia::render('Status/StatusIndex');
     }
 
     /**
@@ -79,6 +80,6 @@ class StatusController extends Controller
     {
         $statuses->delete();
 
-        return response()->json(['message' => 'Status has been deleted successfully!']);
+        return redirect()->route('status.index')->with('success', 'Status deleted successfully.');
     }
 }

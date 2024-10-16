@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BookController extends Controller
 {
@@ -13,7 +14,7 @@ class BookController extends Controller
     public function index()
     {
         $book = Book::all();
-        return response()->json($book);
+        return Inertia::render('Book/BookIndex', ['books' => $book]);
     }
 
     /**
@@ -21,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Book/BookAdd');
     }
 
     /**
@@ -34,13 +35,13 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'location' => 'required|exists:locations,id',
+            'location_id' => 'required|exists:locations,id',
             'acquisition_date' => 'required|date'
         ]);
 
         $book = Book::create($validated);
 
-        return response()->json($book, 201);
+        return Inertia::render('Book/BookIndex');
     }
 
     /**
@@ -48,7 +49,7 @@ class BookController extends Controller
      */
     public function show(Book $books)
     {
-        return response()->json($books);
+        //return response()->json($books);
     }
 
     /**
@@ -56,7 +57,7 @@ class BookController extends Controller
      */
     public function edit(Book $books)
     {
-        //
+        return Inertia::render('Book/BookEdit');
     }
 
     /**
@@ -69,13 +70,13 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'status' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'location' => 'required|exists:locations,id',
+            'location_id' => 'required|exists:locations,id',
             'acquisition_date' => 'required|date'
         ]);
 
         $books->update($validated);
 
-        return response()->json($books);
+        return Inertia::render('Book/BookIndex');
     }
 
     /**
@@ -85,6 +86,6 @@ class BookController extends Controller
     {
         $books->delete();
 
-        return response()->json(['message' => 'Book has been deleted successfully!']);
+        return redirect()->route('book.index')->with('success', 'Book deleted successfully.');
     }
 }

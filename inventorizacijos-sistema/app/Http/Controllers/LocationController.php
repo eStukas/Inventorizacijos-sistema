@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class LocationController extends Controller
 {
@@ -13,7 +14,7 @@ class LocationController extends Controller
     public function index()
     {
         $location = Location::all();
-        return response()->json($location);
+        return Inertia::render('Location/LocationIndex', ['location' => $location]);
     }
 
     /**
@@ -21,7 +22,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Location/LocationAdd');
     }
 
     /**
@@ -32,13 +33,13 @@ class LocationController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'user' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             
         ]);
 
         $location = Location::create($validated);
 
-        return response()->json($location, 201);
+        return Inertia::render('Location/LocationIndex');
     }
 
     /**
@@ -46,7 +47,7 @@ class LocationController extends Controller
      */
     public function show(Location $locations)
     {
-        return response()->json($locations);
+        //return response()->json($locations);
     }
 
     /**
@@ -54,7 +55,7 @@ class LocationController extends Controller
      */
     public function edit(Location $locations)
     {
-        //
+        return Inertia::render('Location/LocationEdit');
     }
 
     /**
@@ -65,13 +66,13 @@ class LocationController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'user' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             
         ]);
 
         $locations->update($validated);
 
-        return response()->json($locations);
+        return Inertia::render('Location/LocationIndex');
     }
 
     /**
@@ -81,6 +82,6 @@ class LocationController extends Controller
     {
         $locations->delete();
 
-        return response()->json(['message' => 'Locations have been deleted successfully!']);
+        return redirect()->route('location.index')->with('success', 'Location deleted successfully.');
     }
 }

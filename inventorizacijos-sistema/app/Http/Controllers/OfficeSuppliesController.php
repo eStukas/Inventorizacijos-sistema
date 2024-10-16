@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Office_supplies;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OfficeSuppliesController extends Controller
 {
@@ -13,7 +14,7 @@ class OfficeSuppliesController extends Controller
     public function index()
     {
         $office_supplies = Office_supplies::all();
-        return response()->json($office_supplies);
+        return Inertia::render('Office_supplies/Office_suppliesIndex', ['office_supplies' => $office_supplies]);
     }
 
     /**
@@ -21,7 +22,7 @@ class OfficeSuppliesController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Office_supplies/Office_suppliesAdd');
     }
 
     /**
@@ -31,14 +32,14 @@ class OfficeSuppliesController extends Controller
     {
         $validated = $request->validate([
             'type' => 'required|string|max:255',
-            'manufacturer' => 'required|exists:manufacturers,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
             'acquisition_date' => 'required|date'
         ]);
 
         $office_supplies = Office_supplies::create($validated);
 
-        return response()->json($office_supplies, 201);
+        return Inertia::render('Office_supplies/Office_suppliesIndex');
     }
 
     /**
@@ -46,7 +47,7 @@ class OfficeSuppliesController extends Controller
      */
     public function show(Office_supplies $office_supplies)
     {
-        return response()->json($office_supplies);
+        //return response()->json($office_supplies);
     }
 
     /**
@@ -54,7 +55,7 @@ class OfficeSuppliesController extends Controller
      */
     public function edit(Office_supplies $office_supplies)
     {
-        //
+        return Inertia::render('Office_supplies/Office_suppliesEdit');
     }
 
     /**
@@ -64,14 +65,14 @@ class OfficeSuppliesController extends Controller
     {
         $validated = $request->validate([
             'type' => 'required|string|max:255',
-            'manufacturer' => 'required|exists:manufacturers,id',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
             'status' => 'required|string|max:255',
             'acquisition_date' => 'required|date'
         ]);
 
         $office_supplies->update($validated);
 
-        return response()->json($office_supplies);
+        return Inertia::render('Office_supplies/Office_suppliesIndex');
     }
 
     /**
@@ -81,6 +82,6 @@ class OfficeSuppliesController extends Controller
     {
         $office_supplies->delete();
 
-        return response()->json(['message' => 'Office supplies have been deleted successfully!']);
+        return redirect()->route('office_supplies.index')->with('success', 'Office supplies deleted successfully.');
     }
 }
