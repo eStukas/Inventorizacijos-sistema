@@ -12,9 +12,9 @@ class Electronics extends Model
     protected $fillable = [
         'inv_code',
         'type',
-        'manufacturer',
+        'manufacturer_id',
         'status',
-        'location',
+        'location_id',
         'manufacture_date',
         'acquisition_date'
     ];

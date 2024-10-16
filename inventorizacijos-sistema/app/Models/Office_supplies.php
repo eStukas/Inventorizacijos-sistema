@@ -11,7 +11,7 @@ class Office_supplies extends Model
     
     protected $fillable = [
         'type',
-        'manufacturer',
+        'manufacturer_id',
         'status',
         'acquisition_date'
     ];

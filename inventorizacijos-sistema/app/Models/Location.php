@@ -12,6 +12,6 @@ class Location extends Model
     protected $fillable = [
         'name',
         'type',
-        'user'
+        'user_id'
     ];
 }

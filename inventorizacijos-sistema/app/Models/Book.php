@@ -14,7 +14,7 @@ class Book extends Model
         'author',
         'status',
         'release_date',
-        'location',
+        'location_id',
         'acquisition_date'
     ];
 }

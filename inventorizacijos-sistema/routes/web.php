@@ -32,4 +32,4 @@ require __DIR__.'/manufacturersRoute.php';
 require __DIR__.'/office_suppliesRoute.php';
 require __DIR__.'/statusesRoute.php';
 require __DIR__.'/softwareRoute.php';
-require __DIR__.'/locationRoute.php';
+require __DIR__.'/locationsRoute.php';
