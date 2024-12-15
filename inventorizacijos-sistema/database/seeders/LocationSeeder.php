@@ -20,7 +20,7 @@ class LocationSeeder extends Seeder
         foreach ($locations as $location_name) {
             $location = Location::where('name', '=', $location_name)->first();
             if ($location == null) {
-                Location::create(['name' => $location_name]);
+                Location::create(['name' => $location_name, 'type' => 'Korpusas']);
                 info($location_name . ' location was created!');
             }
         }

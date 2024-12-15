@@ -16,15 +16,15 @@ class StatusSeeder extends Seeder
         $statuses = [
             [
                 'name' => 'Gerai',
-                'color' => '#33FF33'
+                'status_color' => '#33FF33'
             ],
             [
                 'name' => 'Blogai',
-                'color' => '#FF0000'
+                'status_color' => '#FF0000'
             ],
             [
                 'name' => 'Laukiama',
-                'color' => '#FFFF00'
+                'status_color' => '#FFFF00'
             ]
         ];
 
