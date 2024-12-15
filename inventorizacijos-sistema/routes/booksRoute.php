@@ -10,12 +10,15 @@ Route::get('/book', [BookController::class, 'index'])->name('book.index');
 Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
 Route::post('/book/create', [BookController::class, 'store'])->name('book.store');
 
-/*Displaying specified book data */
+/*Displaying specified book data not needed as of now*/
 Route::get('/book/view/{id}', [BookController::class, 'show'])->name('book.show');
 
 /*Editing and updating existing book data */
-Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
-Route::post('/book/edit/{id}', [BookController::class, 'update'])->name('book.update');
+Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
+Route::post('/book/edit/{book}', [BookController::class, 'update'])->name('book.update');
 
-/*Deleting book data */
-Route::get('/book/destroy/{id}', [BookController::class, 'destroy'])->name('book.delete');
+// /*Deleting book data *
+// Route::get('/book/destroy/{id}', [BookController::class, 'destroy'])->name('book.delete');
+
+
+Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');

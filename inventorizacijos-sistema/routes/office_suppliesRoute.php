@@ -14,8 +14,11 @@ Route::post('/office_supplies/create', [OfficeSuppliesController::class, 'store'
 Route::get('/office_supplies/view/{id}', [OfficeSuppliesController::class, 'show'])->name('office_supplies.show');
 
 /*Editing and updating existing office_supplies data */
-Route::get('/office_supplies/edit/{id}', [OfficeSuppliesController::class, 'edit'])->name('office_supplies.edit');
-Route::post('/office_supplies/edit/{id}', [OfficeSuppliesController::class, 'update'])->name('office_supplies.update');
+Route::get('/office_supplies/edit/{office_supplies}', [OfficeSuppliesController::class, 'edit'])->name('office_supplies.edit');
+Route::put('/office_supplies/edit/{office_supplies}', [OfficeSuppliesController::class, 'update'])->name('office_supplies.update');
 
 /*Deleting office_supplies data */
-Route::get('/office_supplies/destroy/{id}', [OfficeSuppliesController::class, 'destroy'])->name('office_supplies.delete');
+// Route::get('/office_supplies/destroy/{id}', [OfficeSuppliesController::class, 'destroy'])->name('office_supplies.delete');
+
+
+Route::delete('/office_supplies/{office_supplies}', [OfficeSuppliesController::class, 'destroy'])->name('office_supplies.destroy');

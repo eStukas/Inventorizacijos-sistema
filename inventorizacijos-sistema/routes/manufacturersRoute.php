@@ -14,8 +14,10 @@ Route::post('/manufacturer/create', [ManufacturerController::class, 'store'])->n
 Route::get('/manufacturer/view/{id}', [ManufacturerController::class, 'show'])->name('manufacturer.show');
 
 /*Editing and updating existing manufacturer data */
-Route::get('/manufacturer/edit/{id}', [ManufacturerController::class, 'edit'])->name('manufacturer.edit');
-Route::post('/manufacturer/edit/{id}', [ManufacturerController::class, 'update'])->name('manufacturer.update');
+Route::get('/manufacturer/edit/{manufacturer}', [ManufacturerController::class, 'edit'])->name('manufacturer.edit');
+Route::post('/manufacturer/edit/{manufacturer}', [ManufacturerController::class, 'update'])->name('manufacturer.update');
 
 /*Deleting manufacturer data */
-Route::get('/manufacturer/destroy/{id}', [ManufacturerController::class, 'destroy'])->name('manufacturer.delete');
+// Route::get('/manufacturer/destroy/{id}', [ManufacturerController::class, 'destroy'])->name('manufacturer.delete');
+
+Route::delete('/manufacturer/{manufacturer}', [ManufacturerController::class, 'destroy'])->name('manufacturer.destroy');

@@ -11,11 +11,14 @@ Route::get('/electronics/create', [ElectronicsController::class, 'create'])->nam
 Route::post('/electronics/create', [ElectronicsController::class, 'store'])->name('electronics.store');
 
 /*Displaying specified electronics data */
-Route::get('/electronics/view/{id}', [ElectronicsController::class, 'show'])->name('electronics.show');
+// Route::get('/electronics/view/{id}', [ElectronicsController::class, 'show'])->name('electronics.show');
 
 /*Editing and updating existing electronics data */
-Route::get('/electronics/edit/{id}', [ElectronicsController::class, 'edit'])->name('electronics.edit');
-Route::post('/electronics/edit/{id}', [ElectronicsController::class, 'update'])->name('electronics.update');
+Route::get('/electronics/edit/{electronics}', [ElectronicsController::class, 'edit'])->name('electronics.edit');
+Route::put('/electronics/edit/{electronics}', [ElectronicsController::class, 'update'])->name('electronics.update');
 
 /*Deleting electronics data */
-Route::get('/electronics/destroy/{id}', [ElectronicsController::class, 'destroy'])->name('electronics.delete');
+// Route::get('/electronics/destroy/{id}', [ElectronicsController::class, 'destroy'])->name('electronics.delete');
+
+Route::delete('/electronics/{electronics}', [ElectronicsController::class, 'destroy'])->name('electronics.destroy');
+

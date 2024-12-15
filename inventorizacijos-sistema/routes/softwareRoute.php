@@ -14,8 +14,8 @@ Route::post('/software/create', [SoftwareController::class, 'store'])->name('sof
 Route::get('/software/view/{id}', [SoftwareController::class, 'show'])->name('software.show');
 
 /*Editing and updating existing software data */
-Route::get('/software/edit/{id}', [SoftwareController::class, 'edit'])->name('software.edit');
-Route::post('/software/edit/{id}', [SoftwareController::class, 'update'])->name('software.update');
+Route::get('/software/edit/{software}', [SoftwareController::class, 'edit'])->name('software.edit');
+Route::put('/software/edit/{software}', [SoftwareController::class, 'update'])->name('software.update');
 
 /*Deleting software data */
 Route::get('/software/destroy/{id}', [SoftwareController::class, 'destroy'])->name('software.delete');
