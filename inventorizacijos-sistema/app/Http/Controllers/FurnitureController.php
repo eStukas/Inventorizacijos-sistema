@@ -40,7 +40,7 @@ class FurnitureController extends Controller
 
         $furniture = Furniture::create($validated);
 
-        return Inertia::render('Furniture/FurnitureIndex');
+        return redirect()->route('furniture.index');
     }
 
     /**
@@ -56,7 +56,9 @@ class FurnitureController extends Controller
      */
     public function edit(Furniture $furniture)
     {
-        return Inertia::render('Furniture/FurnitureEdit');
+        return Inertia::render('Furniture/FurnitureEdit', [
+            'furniture' => $furniture
+        ]);
     }
 
     /**
@@ -75,7 +77,7 @@ class FurnitureController extends Controller
         $furniture->update($validated);
 
         // Return the updated furniture as JSON
-        return Inertia::render('Furniture/FurnitureIndex');
+        return redirect()->route('furniture.index');
     }
 
     /**
@@ -85,6 +87,6 @@ class FurnitureController extends Controller
     {
         $furniture->delete();
 
-        return redirect()->route('furniture.index')->with('success', 'Furniture deleted successfully.');
+        return redirect()->route('furniture.index');
     }
 }

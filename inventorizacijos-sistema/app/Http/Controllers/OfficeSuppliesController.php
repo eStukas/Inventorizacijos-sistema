@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Office_supplies;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Manufacturer;
 
 class OfficeSuppliesController extends Controller
 {
@@ -13,7 +14,7 @@ class OfficeSuppliesController extends Controller
      */
     public function index()
     {
-        $office_supplies = Office_supplies::all();
+        $office_supplies = Office_supplies::with(['manufacturer'])->get();
         return Inertia::render('Office_supplies/Office_suppliesIndex', ['office_supplies' => $office_supplies]);
     }
 
@@ -21,8 +22,14 @@ class OfficeSuppliesController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return Inertia::render('Office_supplies/Office_suppliesAdd');
+    {   
+        $office_supplies = Office_supplies::all();
+        $manufacturers = Manufacturer::all();
+
+        return Inertia::render('Office_supplies/Office_suppliesAdd',[
+            'office_supplies' => $office_supplies,
+            'manufacturers' => $manufacturers,
+        ]);
     }
 
     /**
@@ -39,7 +46,7 @@ class OfficeSuppliesController extends Controller
 
         $office_supplies = Office_supplies::create($validated);
 
-        return Inertia::render('Office_supplies/Office_suppliesIndex');
+        return redirect()->route('office_supplies.index');
     }
 
     /**
@@ -55,7 +62,12 @@ class OfficeSuppliesController extends Controller
      */
     public function edit(Office_supplies $office_supplies)
     {
-        return Inertia::render('Office_supplies/Office_suppliesEdit');
+        $manufacturers = Manufacturer::all();
+    
+        return Inertia::render('Office_supplies/Office_suppliesEdit', [
+            'office_supplies' => $office_supplies,
+            'manufacturers' => $manufacturers,
+        ]);
     }
 
     /**
@@ -72,7 +84,7 @@ class OfficeSuppliesController extends Controller
 
         $office_supplies->update($validated);
 
-        return Inertia::render('Office_supplies/Office_suppliesIndex');
+        return redirect()->route('office_supplies.index');
     }
 
     /**

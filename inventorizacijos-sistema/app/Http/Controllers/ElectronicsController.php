@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Electronics;
+use App\Models\Location;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +15,7 @@ class ElectronicsController extends Controller
      */
     public function index()
     {
-        $electronics = Electronics::all();
+        $electronics = Electronics::with(['manufacturer', 'location'])->get();
         return Inertia::render('Electronics/ElectronicsIndex', ['electronics' => $electronics]);
     }
 
@@ -22,7 +24,13 @@ class ElectronicsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Electronics/ElectronicsAdd');
+        $manufacturers = Manufacturer::all();
+        $locations = Location::all();
+
+        return Inertia::render('Electronics/ElectronicsAdd', [
+            'manufacturers' => $manufacturers,
+            'locations' => $locations,
+        ]);
     }
 
     /**
@@ -31,10 +39,10 @@ class ElectronicsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'inv_code' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'inv_code' => 'required|alpha_num|max:255',
+            'type' => 'required|alpha_num|max:255',
             'manufacturer_id' => 'required|exists:manufacturers,id',
-            'status' => 'required|string|max:255',
+            'status' => 'required|alpha_num|max:255',
             'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
@@ -42,15 +50,7 @@ class ElectronicsController extends Controller
 
         $electronics = Electronics::create($validated);
 
-        return Inertia::render('Electronics/ElectronicsIndex');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Electronics $electronics)
-    {
-        //return response()->json($electronics);
+        return redirect()->route('electronics.index');
     }
 
     /**
@@ -58,19 +58,25 @@ class ElectronicsController extends Controller
      */
     public function edit(Electronics $electronics)
     {
-        return Inertia::render('Electronics/ElectronicsEdit');
-    }
+        $manufacturers = Manufacturer::all();
+        $locations = Location::all();
 
+        return Inertia::render('Electronics/ElectronicsEdit', [
+            'electronics' => $electronics,
+            'manufacturers' => $manufacturers,
+            'locations' => $locations,
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Electronics $electronics)
     {
         $validated = $request->validate([
-            'inv_code' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'inv_code' => 'required|alpha_num|max:255',
+            'type' => 'required|alpha_num|max:255',
             'manufacturer_id' => 'required|exists:manufacturers,id',
-            'status' => 'required|string|max:255',
+            'status' => 'required|alpha_num|max:255',
             'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
@@ -78,7 +84,7 @@ class ElectronicsController extends Controller
 
         $electronics->update($validated);
 
-        return Inertia::render('Electronics/ElectronicsIndex');
+        return redirect()->route('electronics.index');
     }
 
     /**
@@ -87,7 +93,6 @@ class ElectronicsController extends Controller
     public function destroy(Electronics $electronics)
     {
         $electronics->delete();
-
-        return redirect()->route('electronics.index')->with('success', 'Electronics deleted successfully.');
+        return redirect()->route('electronics.index');
     }
 }

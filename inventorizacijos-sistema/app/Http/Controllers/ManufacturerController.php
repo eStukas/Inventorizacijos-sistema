@@ -14,8 +14,8 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        $manufacturer = Manufacturer::all();
-        return Inertia::render('Manufacturer/ManufacturerIndex', ['manufacturer' => $manufacturer]);
+        $manufacturers = Manufacturer::all();
+        return Inertia::render('Manufacturer/ManufacturerIndex', ['manufacturer' => $manufacturers]);
     }
 
     /**
@@ -34,12 +34,12 @@ class ManufacturerController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:255'
+            'contact_number' => 'required|int'
         ]);
 
         $manufacturer = Manufacturer::create($validated);
 
-        return Inertia::render('Manufacturer/ManufacturerIndex');
+        return redirect()->route('manufacturer.index');
     }
 
     /**
@@ -54,34 +54,36 @@ class ManufacturerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Manufacturer $manufacturers)
+    public function edit(Manufacturer $manufacturer)
     {
-        return Inertia::render('Manufacturer/ManufacturerEdit');
+        return Inertia::render('Manufacturer/ManufacturerEdit', [
+            'manufacturer' => $manufacturer
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Manufacturer $manufacturers)
+    public function update(Request $request, Manufacturer $manufacturer)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'contact_number' => 'required|string|max:255'
         ]);
-
-        $manufacturers->update($validated);
-
-        return Inertia::render('Manufacturer/ManufacturerIndex');
+    
+        $manufacturer->update($validated);
+    
+        return redirect()->route('manufacturer.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Manufacturer $manufacturers)
+    public function destroy(Manufacturer $manufacturer)
     {
-        $manufacturers->delete();
+        $manufacturer->delete();
 
-        return redirect()->route('manufacturer.index')->with('success', 'Manufacturer deleted successfully.');
+        return redirect()->route('manufacturer.index');
     }
 }

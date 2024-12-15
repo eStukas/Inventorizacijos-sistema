@@ -33,13 +33,13 @@ class LocationController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             
         ]);
 
         $location = Location::create($validated);
 
-        return Inertia::render('Location/LocationIndex');
+        return redirect()->route('location.index');
     }
 
     /**
@@ -53,35 +53,35 @@ class LocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Location $locations)
+    public function edit(Location $location)
     {
-        return Inertia::render('Location/LocationEdit');
+        return Inertia::render('Location/LocationEdit', [
+            'location' => $location, // Pass the location to the view
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Location $locations)
+    public function update(Request $request, Location $location)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
-            
+            'user_id' => 'nullable|exists:users,id',
         ]);
-
-        $locations->update($validated);
-
-        return Inertia::render('Location/LocationIndex');
+    
+        $location->update($validated);
+    
+        return redirect()->route('location.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Location $locations)
+    public function destroy(Location $location)
     {
-        $locations->delete();
+        $location->delete();
 
-        return redirect()->route('location.index')->with('success', 'Location deleted successfully.');
+        return redirect()->route('location.index');
     }
 }

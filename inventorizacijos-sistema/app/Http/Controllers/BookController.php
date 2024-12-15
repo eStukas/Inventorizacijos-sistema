@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 
 class BookController extends Controller
 {
@@ -13,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::all();
+        $book = Book::with(['location'])->get();
         return Inertia::render('Book/BookIndex', ['books' => $book]);
     }
 
@@ -22,7 +24,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Book/BookAdd');
+        $locations = Location::all(); // Get all locations
+        return Inertia::render('Book/BookAdd', ['locations' => $locations]);
     }
 
     /**
@@ -41,7 +44,7 @@ class BookController extends Controller
 
         $book = Book::create($validated);
 
-        return Inertia::render('Book/BookIndex');
+        return redirect()->route('book.index');
     }
 
     /**
@@ -55,15 +58,20 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Book $books)
+    public function edit(Book $book)
     {
-        return Inertia::render('Book/BookEdit');
+        $locations = Location::all();
+
+        return Inertia::render('Book/BookEdit', [
+            'book' => $book,
+            'locations' => $locations,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $books)
+    public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
             'type' => 'required|string|max:255',
@@ -71,21 +79,20 @@ class BookController extends Controller
             'status' => 'required|string|max:255',
             'release_date' => 'required|date',
             'location_id' => 'required|exists:locations,id',
-            'acquisition_date' => 'required|date'
+            'acquisition_date' => 'required|date',
         ]);
 
-        $books->update($validated);
+        $book->update($validated);
 
-        return Inertia::render('Book/BookIndex');
+        return redirect()->route('book.index')->with('success', 'Book updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $books)
+    public function destroy(Book $book)
     {
-        $books->delete();
-
+        $book->delete();
         return redirect()->route('book.index')->with('success', 'Book deleted successfully.');
     }
 }
