@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('inv_code');
             $table->string('type');
-            $table->foreignIdFor(Manufacturer::class)->constrained('manfucturers')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(Manufacturer::class)->constrained('manufacturers')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('status');
             $table->foreignIdFor(Location::class)->constrained('locations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('manufacture_date');
             $table->date('acquisition_date');            
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
@@ -34,3 +34,6 @@ return new class extends Migration
         Schema::dropIfExists('electronics');
     }
 };
+
+
+
