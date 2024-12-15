@@ -17,4 +17,8 @@ class Book extends Model
         'location_id',
         'acquisition_date'
     ];
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 }
