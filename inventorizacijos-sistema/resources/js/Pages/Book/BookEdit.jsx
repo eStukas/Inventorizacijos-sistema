@@ -48,12 +48,16 @@ const BookEdit = ({ book, locations }) => {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Status</label>
-                        <input
-                            type="text"
+                        <select
+                            name="status"
                             value={data.status}
                             onChange={(e) => setData("status", e.target.value)}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                        >
+                            <option value="">Select Status</option>
+                            <option value="used">Used</option>
+                            <option value="not used">Not Used</option>
+                        </select>
                         {errors.status && <div>{errors.status}</div>}
                     </div>
                     <div>
