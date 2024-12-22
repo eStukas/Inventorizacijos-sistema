@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 const BooksAdd = ({ locations }) => {
     const { data, setData, post, processing, errors } = useForm({
-        type: "",
+        title: "",
         author: "",
         status: "",
         release_date: "",
@@ -32,16 +32,16 @@ const BooksAdd = ({ locations }) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
-                            Type
+                            Title
                         </label>
                         <input
                             type="text"
-                            name="type"
-                            value={data.type}
-                            onChange={(e) => setData("type", e.target.value)}
+                            name="title"
+                            value={data.title}
+                            onChange={(e) => setData("title", e.target.value)}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
-                        {errors.type && <div className="text-red-600">{errors.type}</div>}
+                        {errors.title && <div className="text-red-600">{errors.title}</div>}
                     </div>
 
                     <div>

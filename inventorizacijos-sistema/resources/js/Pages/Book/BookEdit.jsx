@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 const BookEdit = ({ book, locations }) => {
     const { data, setData, post, processing, errors } = useForm({
-        type: book.type || "",
+        title: book.title || "",
         author: book.author || "",
         status: book.status || "",
         release_date: book.release_date || "",
@@ -27,14 +27,14 @@ const BookEdit = ({ book, locations }) => {
                 <h1 className="text-3xl font-bold mb-4">Edit Book</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Type</label>
+                        <label className="block text-sm font-medium text-gray-700">Title</label>
                         <input
                             type="text"
-                            value={data.type}
-                            onChange={(e) => setData("type", e.target.value)}
+                            value={data.title}
+                            onChange={(e) => setData("title", e.target.value)}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
-                        {errors.type && <div>{errors.type}</div>}
+                        {errors.title && <div>{errors.title}</div>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Author</label>

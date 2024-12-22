@@ -35,7 +35,7 @@ const BookIndex = ({ books }) => {
                     <thead>
                         <tr>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">ID</th>
-                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Type</th>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Title</th>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Author</th>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Status</th>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Release Date</th>
@@ -48,11 +48,10 @@ const BookIndex = ({ books }) => {
                         {books.map((book) => (
                             <tr key={book.id} className="hover:bg-gray-100">
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.id}</td>
-                                <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.type}</td>
+                                <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.title}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.author}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.status}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.release_date}</td>
-                                {/* <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{(book.release_date ? (moment(book.release_date).difference(moment()).minutes > 10 ? `Offline (last online ${})` : 'Online') : 'Dar negautas signalas')}</td> */}
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.location?.name || 'N/A'}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.acquisition_date}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
