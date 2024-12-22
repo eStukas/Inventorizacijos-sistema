@@ -50,7 +50,9 @@ const BookIndex = ({ books }) => {
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.id}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.title}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.author}</td>
-                                <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.status}</td>
+                                <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                    {book.status.charAt(0).toUpperCase() + book.status.slice(1)}
+                                </td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.release_date}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.location?.name || 'N/A'}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{book.acquisition_date}</td>
