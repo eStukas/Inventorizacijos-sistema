@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TV;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class TVController extends Controller
 {
@@ -73,13 +74,13 @@ class TVController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TV $tv)
+    public function destroy(TV $id)
     {
-        $tv->delete();
 
-        return redirect()->route('TVs.index')->with('success', 'TV deleted successfully.');
+        $id->delete();
+
+        return redirect()->route('tv.index');
     }
-
 
 
     public function ping(TV $tv)
@@ -87,6 +88,6 @@ class TVController extends Controller
         $tv->last_ping = now('Europe/Vilnius');
         $tv->save();
 
-        return 'ok';
+    
     }
 }

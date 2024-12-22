@@ -17,8 +17,8 @@ Route::get('/tv-control/edit/{tv}', [TVController::class, 'edit'])->name('tv.edi
 Route::post('/tv-control/edit/{tv}', [TVController::class, 'update'])->name('tv.update');
 
 /*Deleting TV data */
-Route::get('/tv-control/destroy/{id}', [TVController::class, 'destroy'])->name('tv.delete');
+Route::delete('/tv-control/{tv}', [TVController::class, 'destroy'])->name('tv.delete');
 
-Route::get('/tv-control/ping/{tv}', [TVController::class, 'ping'])->name('tv.ping'); // Ping TV route
+Route::get('/tv-control/ping/{tv}', [TVController::class, 'ping'])->name('tv.ping');
 
 // TODO: create form&route / store route ----- done

@@ -1,8 +1,33 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import moment from 'moment/moment';
 
 export default function TVIndex({ tvs }) {
+    const handleDelete = (id) => {
+        if (confirm("Are you sure you want to delete this TV?")) {
+            router.delete(`/tv-control/${id}`, {
+                onSuccess: () => {
+                    alert("TV deleted successfully!");
+                },
+                onError: (error) => {
+                    console.error("Error deleting the TV:", error);
+                }
+            });
+        }
+    };
+
+    const handlePing = (id) => {
+    if (confirm("Are you sure you want to ping this TV?")) {
+        router.get(`/tv-control/ping/${id}`, {
+            onSuccess: () => {
+                alert("TV pinged successfully!");
+            },
+            onError: (error) => {
+                console.error("Error pinging the TV:", error);
+            }
+        });
+    }
+};
     return (
 
         <AuthenticatedLayout>
@@ -42,18 +67,22 @@ export default function TVIndex({ tvs }) {
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
                                     <Link
                                         href={route('tv.edit', tv.id)}
-                                        className="text-blue-500 hover:underline mr-4"
+                                        className="text-blue-500 hover:text-blue-800 hover:underline mr-4"
                                     >
                                         Edit
                                     </Link>
-                                    <Link
-                                        href={route('tv.delete', tv.id)}
-                                        method="get"
-                                        className="text-red-500 hover:underline"
-                                        as="button"
+                                    <button
+                                        onClick={() => handleDelete(tv.id)}
+                                        className="text-red-500 hover:text-red-800 hover:underline mr-4"
                                     >
                                         Delete
-                                    </Link>
+                                    </button>
+                                    <button
+                                        onClick={() => handlePing(tv.id)}
+                                        className="text-green-500 hover:text-green-800 hover:underline"
+                                    >
+                                        Ping
+                                    </button>
                                 </td>
                             </tr>
                         ))}
