@@ -3,7 +3,7 @@ import { Head, useForm, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const FurnitureAdd = () => {
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, errors, processing } = useForm({
         type: '',
         manufacturer_provider: '',
         status: '',
@@ -14,7 +14,6 @@ const FurnitureAdd = () => {
         e.preventDefault();
         post(route('furniture.store'), {
             onSuccess: () => {
-                // Redirect to the index page after successful creation
                 window.location.href = route('furniture.index');
             }
         });
@@ -23,7 +22,7 @@ const FurnitureAdd = () => {
     return (
         <div>
             <AuthenticatedLayout>
-                
+
             </AuthenticatedLayout>
             <div className="container mx-auto px-4">
                 <Head title="Add New Furniture" />
@@ -79,19 +78,20 @@ const FurnitureAdd = () => {
                         {errors.acquisition_date && <div className="text-red-600 text-sm mt-1">{errors.acquisition_date}</div>}
                     </div>
 
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
+                        >
+                            Add Furniture
+                        </button>
                         <Link
                             href={route('furniture.index')}
                             className="text-gray-600 hover:text-gray-800"
                         >
                             Cancel
                         </Link>
-                        <button
-                            type="submit"
-                            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
-                        >
-                            Save Furniture
-                        </button>
                     </div>
                 </form>
             </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import {Head, useForm, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const LocationAdd = () => {
-    const { data, setData, post, errors, reset } = useForm({
+    const { data, setData, post, errors, reset, processing } = useForm({
         name: '',
         type: '',
         user_id: '',
@@ -22,6 +22,7 @@ const LocationAdd = () => {
             <AuthenticatedLayout>
 
             </AuthenticatedLayout>
+            <Head title="Add New Location" />
             <div className="container mx-auto px-4">
                 <h1 className="text-3xl font-bold mb-4">Add New Location</h1>
 
@@ -76,13 +77,20 @@ const LocationAdd = () => {
                         </span>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="flex items-center justify-between">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            disabled={processing}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
                         >
                             Add Location
                         </button>
+                        <Link
+                            href={route('location.index')}
+                            className="text-gray-600 hover:text-gray-800"
+                        >
+                            Cancel
+                        </Link>
                     </div>
                 </form>
             </div>

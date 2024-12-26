@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 const ManufacturersAdd = () => {
     // Form state and handler
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, errors, processing } = useForm({
         name: "",
         email: "",
         contact_number: "",
@@ -31,8 +31,7 @@ const ManufacturersAdd = () => {
 
                 <h1 className="text-3xl font-bold mb-4">Add Manufacturer</h1>
 
-                <form onSubmit={handleSubmit}>
-                    {/* Name Field */}
+                <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-md p-6 space-y-4">
                     <div className="mb-4">
                         <label
                             htmlFor="name"
@@ -53,7 +52,6 @@ const ManufacturersAdd = () => {
                         )}
                     </div>
 
-                    {/* Email Field */}
                     <div className="mb-4">
                         <label
                             htmlFor="email"
@@ -74,7 +72,6 @@ const ManufacturersAdd = () => {
                         )}
                     </div>
 
-                    {/* Contact Number Field */}
                     <div className="mb-4">
                         <label
                             htmlFor="contact_number"
@@ -95,26 +92,24 @@ const ManufacturersAdd = () => {
                         )}
                     </div>
 
-                    {/* Submit Button */}
-                    <div className="mt-6 text-right">
+                    <div className="flex items-center justify-between">
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white px-6 py-2 rounded-md shadow-sm hover:bg-blue-700"
+                            disabled={processing}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
                         >
                             Add Manufacturer
                         </button>
+                        <Link
+                            href={route('manufacturer.index')}
+                            className="text-gray-600 hover:text-gray-800"
+                        >
+                            Cancel
+                        </Link>
                     </div>
                 </form>
 
-                {/* Cancel Button */}
-                <div className="mt-4">
-                    <Link
-                        href={route("manufacturer.index")}
-                        className="text-blue-600 hover:text-blue-800"
-                    >
-                        Cancel
-                    </Link>
-                </div>
+
             </div>
         </div>
 

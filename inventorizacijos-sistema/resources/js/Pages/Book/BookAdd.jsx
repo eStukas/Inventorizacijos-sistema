@@ -29,7 +29,7 @@ const BooksAdd = ({ locations }) => {
             <div className="container mx-auto px-4">
                 <h1 className="text-3xl font-bold mb-4">Add New Book</h1>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-md">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
                             Title
@@ -114,7 +114,7 @@ const BooksAdd = ({ locations }) => {
                         )}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Acquisition Date
                         </label>
