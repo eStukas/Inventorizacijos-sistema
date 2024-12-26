@@ -62,8 +62,6 @@ export default function TVIndex({ tvs }) {
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{tv.ip_address}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{tv.last_ping}</td>
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{(tv.last_ping ? (moment().diff(moment(tv.last_ping), 'minutes') > 1 ? `Offline (last online ${moment(tv.last_ping).format('YYYY-MM-DD HH:mm:ss')})` : 'Online') : 'Signal not received yet')}</td>
-
-                                {/* <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">{"placeholder for status"}</td> */}
                                 <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
                                     <Link
                                         href={route('tv.edit', tv.id)}
