@@ -39,17 +39,20 @@ const OfficeSuppliesEdit = ({ office_supplies, manufacturers }) => {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="status" className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700">
                             Status
                         </label>
-                        <input
-                            type="text"
-                            id="status"
+                        <select
+                            name="status"
                             value={data.status}
-                            onChange={(e) => setData('status', e.target.value)}
-                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        />
-                        {errors.status && <p className="text-red-600 text-sm mt-1">{errors.status}</p>}
+                            onChange={(e) => setData("status", e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        >
+                            <option value="">Select Status</option>
+                            <option value="Used">Used</option>
+                            <option value="Not Used">Not Used</option>
+                        </select>
+                        {errors.status && <div className="text-red-600">{errors.status}</div>}
                     </div>
 
                     <div className="mb-4">

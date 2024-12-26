@@ -14,8 +14,7 @@ const FurnitureEdit = ({ furniture }) => {
         e.preventDefault();
         post(route('furniture.update', furniture.id), {
             onSuccess: () => {
-                // Redirect to the index page after successful update
-                window.location.href = route('furniture.index');
+                
             }
         });
     };
@@ -23,7 +22,7 @@ const FurnitureEdit = ({ furniture }) => {
     return (
         <div>
             <AuthenticatedLayout>
-                
+
             </AuthenticatedLayout>
             <div className="container mx-auto px-4">
                 <Head title={`Edit Furniture: ${furniture.type}`} />
@@ -31,7 +30,7 @@ const FurnitureEdit = ({ furniture }) => {
                 <h1 className="text-3xl font-bold mb-4">Edit Furniture</h1>
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-md p-6 space-y-4">
-                    <div>
+                    <div className="mb-4">
                         <label htmlFor="type" className="block text-sm font-medium text-gray-700">Furniture Type</label>
                         <input
                             id="type"
@@ -43,7 +42,7 @@ const FurnitureEdit = ({ furniture }) => {
                         {errors.type && <div className="text-red-600 text-sm mt-1">{errors.type}</div>}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label htmlFor="manufacturer_provider" className="block text-sm font-medium text-gray-700">Manufacturer/Provider</label>
                         <input
                             id="manufacturer_provider"
@@ -55,19 +54,22 @@ const FurnitureEdit = ({ furniture }) => {
                         {errors.manufacturer_provider && <div className="text-red-600 text-sm mt-1">{errors.manufacturer_provider}</div>}
                     </div>
 
-                    <div>
-                        <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
-                        <input
-                            id="status"
-                            type="text"
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Status</label>
+                        <select
+                            name="status"
                             value={data.status}
-                            onChange={(e) => setData('status', e.target.value)}
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        {errors.status && <div className="text-red-600 text-sm mt-1">{errors.status}</div>}
+                            onChange={(e) => setData("status", e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        >
+                            <option value="">Select Status</option>
+                            <option value="Used">Used</option>
+                            <option value="Not Used">Not Used</option>
+                        </select>
+                        {errors.status && <div>{errors.status}</div>}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label htmlFor="acquisition_date" className="block text-sm font-medium text-gray-700">Acquisition Date</label>
                         <input
                             id="acquisition_date"
@@ -80,18 +82,18 @@ const FurnitureEdit = ({ furniture }) => {
                     </div>
 
                     <div className="flex justify-between items-center">
+                        <button
+                            type="submit"
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
+                        >
+                            Save changes
+                        </button>
                         <Link
                             href={route('furniture.index')}
                             className="text-gray-600 hover:text-gray-800"
                         >
                             Cancel
                         </Link>
-                        <button
-                            type="submit"
-                            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
-                        >
-                            Update Furniture
-                        </button>
                     </div>
                 </form>
             </div>
