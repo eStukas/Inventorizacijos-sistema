@@ -30,7 +30,7 @@ const BooksAdd = ({ locations }) => {
                 <h1 className="text-3xl font-bold mb-4">Add New Book</h1>
 
                 <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-md">
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Title
                         </label>
@@ -44,7 +44,7 @@ const BooksAdd = ({ locations }) => {
                         {errors.title && <div className="text-red-600">{errors.title}</div>}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Author
                         </label>
@@ -58,7 +58,7 @@ const BooksAdd = ({ locations }) => {
                         {errors.author && <div className="text-red-600">{errors.author}</div>}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Status
                         </label>
@@ -76,7 +76,7 @@ const BooksAdd = ({ locations }) => {
 
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Release Date
                         </label>
@@ -92,7 +92,7 @@ const BooksAdd = ({ locations }) => {
                         )}
                     </div>
 
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Location
                         </label>

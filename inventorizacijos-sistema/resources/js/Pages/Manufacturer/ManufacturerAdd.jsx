@@ -3,19 +3,17 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 const ManufacturersAdd = () => {
-    // Form state and handler
     const { data, setData, post, errors, processing } = useForm({
         name: "",
         email: "",
         contact_number: "",
     });
 
-    // Form submit handler
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route("manufacturer.store"), {
             onSuccess: () => {
-                // Redirect to the manufacturer index after successful submit
+                
             },
         });
     };

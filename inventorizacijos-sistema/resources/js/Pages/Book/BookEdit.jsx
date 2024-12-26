@@ -19,14 +19,16 @@ const BookEdit = ({ book, locations }) => {
 
     return (
         <div>
-           <AuthenticatedLayout>
-            
-           </AuthenticatedLayout>
+            <AuthenticatedLayout>
+
+            </AuthenticatedLayout>
             <Head title="Edit Book" />
             <div className="container mx-auto px-4">
+
                 <h1 className="text-3xl font-bold mb-4">Edit Book</h1>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
+
+                <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-md">
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Title</label>
                         <input
                             type="text"
@@ -36,7 +38,7 @@ const BookEdit = ({ book, locations }) => {
                         />
                         {errors.title && <div>{errors.title}</div>}
                     </div>
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Author</label>
                         <input
                             type="text"
@@ -46,7 +48,7 @@ const BookEdit = ({ book, locations }) => {
                         />
                         {errors.author && <div>{errors.author}</div>}
                     </div>
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Status</label>
                         <select
                             name="status"
@@ -60,7 +62,7 @@ const BookEdit = ({ book, locations }) => {
                         </select>
                         {errors.status && <div>{errors.status}</div>}
                     </div>
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Release Date</label>
                         <input
                             type="date"
@@ -70,7 +72,7 @@ const BookEdit = ({ book, locations }) => {
                         />
                         {errors.release_date && <div>{errors.release_date}</div>}
                     </div>
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Location</label>
                         <select
                             value={data.location_id}
@@ -86,7 +88,7 @@ const BookEdit = ({ book, locations }) => {
                         </select>
                         {errors.location_id && <div>{errors.location_id}</div>}
                     </div>
-                    <div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Acquisition Date</label>
                         <input
                             type="date"
@@ -97,20 +99,20 @@ const BookEdit = ({ book, locations }) => {
                         {errors.acquisition_date && <div>{errors.acquisition_date}</div>}
                     </div>
                     <div className="flex items-center justify-between">
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
-                    >
-                        Edit Book
-                    </button>
-                    <Link
-                        href={route('book.index')}
-                        className="text-gray-600 hover:text-gray-800"
-                    >
-                        Cancel
-                    </Link>
-                </div>
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
+                        >
+                            Save changes
+                        </button>
+                        <Link
+                            href={route('book.index')}
+                            className="text-gray-600 hover:text-gray-800"
+                        >
+                            Cancel
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const LocationEdit = ({ location }) => {
@@ -25,7 +25,6 @@ const LocationEdit = ({ location }) => {
                 <h1 className="text-3xl font-bold mb-4">Edit Location</h1>
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-md p-6 space-y-4">
-                    {/* Name Field */}
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                             Name
@@ -43,7 +42,6 @@ const LocationEdit = ({ location }) => {
                         {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
                     </div>
 
-                    {/* Type Field */}
                     <div className="mb-4">
                         <label htmlFor="type" className="block text-sm font-medium text-gray-700">
                             Type
@@ -61,7 +59,6 @@ const LocationEdit = ({ location }) => {
                         {errors.type && <span className="text-red-500 text-sm">{errors.type}</span>}
                     </div>
 
-                    {/* User ID Field */}
                     <div className="mb-4">
                         <label htmlFor="user_id" className="block text-sm font-medium text-gray-700">
                             User ID
@@ -81,14 +78,19 @@ const LocationEdit = ({ location }) => {
                         </span>
                     </div>
 
-                    {/* Submit Button */}
-                    <div className="mt-6">
+                    <div className="flex justify-between items-center">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
                         >
-                            Update Location
+                            Save changes
                         </button>
+                        <Link
+                            href={route('location.index')}
+                            className="text-gray-600 hover:text-gray-800"
+                        >
+                            Cancel
+                        </Link>
                     </div>
                 </form>
             </div>
