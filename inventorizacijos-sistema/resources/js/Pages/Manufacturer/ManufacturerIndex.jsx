@@ -31,13 +31,13 @@ const ManufacturerIndex = ({ manufacturer }) => {
                 <div className="mb-4">
                     <Link
                         href={route('manufacturer.create')}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none"
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block"
                     >
                         Add Manufacturer
                     </Link>
                 </div>
-                <table className="min-w-full table-auto">
-                    <thead className="bg-gray-100">
+                <table className="min-w-full table-auto bg-white border border-gray-200 rounded-md shadow-md">
+                    <thead>
                         <tr>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">ID</th>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">Name</th>

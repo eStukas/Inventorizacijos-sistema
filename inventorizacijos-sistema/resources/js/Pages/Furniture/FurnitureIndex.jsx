@@ -36,7 +36,7 @@ const FurnitureIndex = ({ furniture }) => {
                 </Link>
 
 
-                <table className="min-w-full table-auto bg-white border border-gray-200 rounded-md shadow-sm">
+                <table className="min-w-full table-auto bg-white border border-gray-200 rounded-md shadow-md">
                     <thead>
                         <tr>
                             <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">ID</th>

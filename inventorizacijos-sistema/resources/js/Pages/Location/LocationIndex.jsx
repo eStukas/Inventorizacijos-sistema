@@ -31,72 +31,72 @@ const LocationIndex = ({ location }) => {
                     Add New Location
                 </Link>
 
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200 shadow-md">
-                        <thead>
-                            <tr>
-                                <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
-                                    ID
-                                </th>
-                                <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
-                                    Name
-                                </th>
-                                <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
-                                    Type
-                                </th>
-                                <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
-                                    User ID
-                                </th>
-                                <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.isArray(location) && location.length > 0 ? (
-                                location.map((loc) => (
-                                    <tr key={loc.id} className="hover:bg-gray-100">
-                                        <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
-                                            {loc.id}
-                                        </td>
-                                        <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
-                                            {loc.name}
-                                        </td>
-                                        <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
-                                            {loc.type}
-                                        </td>
-                                        <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
-                                            {loc.user_id || 'Unassigned'}
-                                        </td>
-                                        <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
-                                            <Link
-                                                href={`/location/edit/${loc.id}`}
-                                                className="text-blue-500 hover:underline mr-4"
-                                            >
-                                                Edit
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDelete(loc.id)}
-                                                className="text-red-500 hover:text-red-800 hover:underline"
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td
-                                        colSpan="5"
-                                        className="px-6 py-4 border-b border-gray-200 text-sm text-gray-500 text-center"
-                                    >
-                                        No locations found.
+
+                <table className="min-w-full table-auto bg-white border border-gray-200 rounded-md shadow-md">
+                    <thead>
+                        <tr>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
+                                ID
+                            </th>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
+                                Name
+                            </th>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
+                                Type
+                            </th>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
+                                User ID
+                            </th>
+                            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500 uppercase">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(location) && location.length > 0 ? (
+                            location.map((loc) => (
+                                <tr key={loc.id} className="hover:bg-gray-100">
+                                    <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                        {loc.id}
+                                    </td>
+                                    <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                        {loc.name}
+                                    </td>
+                                    <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                        {loc.type}
+                                    </td>
+                                    <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                        {loc.user_id || 'Unassigned'}
+                                    </td>
+                                    <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                                        <Link
+                                            href={`/location/edit/${loc.id}`}
+                                            className="text-blue-500 hover:underline mr-4"
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            onClick={() => handleDelete(loc.id)}
+                                            className="text-red-500 hover:text-red-800 hover:underline"
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                            ))
+                        ) : (
+                            <tr>
+                                <td
+                                    colSpan="5"
+                                    className="px-6 py-4 border-b border-gray-200 text-sm text-gray-500 text-center"
+                                >
+                                    No locations found.
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+
             </div>
         </div>
     );
