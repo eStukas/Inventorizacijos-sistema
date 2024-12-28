@@ -49,8 +49,9 @@ class TVController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(TV $tv)
-    {
-        return Inertia::render('TVs/edit');
+    {   
+       
+        return Inertia::render('TVs/TVEdit', ['tv' => $tv]);
     }
 
     /**
@@ -67,7 +68,7 @@ class TVController extends Controller
 
         $tv->update($validated);
 
-        return redirect()->route('TVs.index');
+        return redirect()->route('tv.index');
     }
 
 
