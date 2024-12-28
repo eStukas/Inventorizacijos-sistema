@@ -42,7 +42,7 @@ class ElectronicsController extends Controller
             'inv_code' => 'required|alpha_num|max:255',
             'type' => 'required|alpha_num|max:255',
             'manufacturer_id' => 'required|exists:manufacturers,id',
-            'status' => 'required|alpha_num|max:255',
+            'status' => 'required|max:255',
             'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
@@ -76,7 +76,7 @@ class ElectronicsController extends Controller
             'inv_code' => 'required|alpha_num|max:255',
             'type' => 'required|alpha_num|max:255',
             'manufacturer_id' => 'required|exists:manufacturers,id',
-            'status' => 'required|alpha_num|max:255',
+            'status' => 'required|max:255',
             'location_id' => 'required|exists:locations,id',
             'manufacture_date' => 'required|date',
             'acquisition_date' => 'required|date'
