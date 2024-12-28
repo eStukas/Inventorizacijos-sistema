@@ -17,4 +17,16 @@ class Software extends Model
         'valid_until',
         'amount'
     ];
+
+    public function software_type()
+    {
+        return $this->belongsTo(Software_type::class);
+    }
+    public function manufacturer(){
+        return $this->belongsTo(Manufacturer::class);
+    }
+    public function status(){
+        return $this->belongsTo(Status::class);
+    }
+
 }

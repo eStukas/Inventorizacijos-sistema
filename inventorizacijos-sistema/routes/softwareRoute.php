@@ -18,4 +18,4 @@ Route::get('/software/edit/{software}', [SoftwareController::class, 'edit'])->na
 Route::put('/software/edit/{software}', [SoftwareController::class, 'update'])->name('software.update');
 
 /*Deleting software data */
-Route::get('/software/destroy/{id}', [SoftwareController::class, 'destroy'])->name('software.delete');
+Route::delete('/software/{software}', [SoftwareController::class, 'destroy'])->name('software.delete');

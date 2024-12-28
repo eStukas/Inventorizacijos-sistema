@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Software;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Software_type;
+Use App\Models\Manufacturer;
+Use App\Models\Status;
 
 class SoftwareController extends Controller
 {
@@ -13,7 +16,7 @@ class SoftwareController extends Controller
      */
     public function index()
     {
-        $software = Software::all();
+        $software = Software::with(['software_type', 'manufacturer', 'status'])->get();
         return Inertia::render('Software/SoftwareIndex', ['software' => $software]);
     }
 
@@ -22,7 +25,11 @@ class SoftwareController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Software/SoftwareAdd');
+        return Inertia::render('Software/SoftwareAdd', [
+            'softwareTypes' => Software_type::all(),
+            'manufacturers' => Manufacturer::all(),
+            'statuses' => Status::all(),
+        ]);
     }
 
     /**
@@ -41,7 +48,7 @@ class SoftwareController extends Controller
 
         $software = Software::create($validated);
 
-        return Inertia::render('Software/SoftwareIndex');
+        return redirect()->route('software.index');
     }
 
     /**
@@ -56,9 +63,14 @@ class SoftwareController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Software $software)
-    {
-        return Inertia::render('Software/SoftwareEdit');
-    }
+{
+    return Inertia::render('Software/SoftwareEdit', [
+        'software' => $software,
+        'softwareTypes' => Software_type::all(),
+        'manufacturers' => Manufacturer::all(),
+        'statuses' => Status::all(),
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
@@ -76,7 +88,7 @@ class SoftwareController extends Controller
 
         $software->update($validated);
 
-        return Inertia::render('Software/SoftwareIndex');
+        return redirect()->route('software.index');
     }
 
     /**
@@ -86,6 +98,6 @@ class SoftwareController extends Controller
     {
         $software->delete();
 
-        return redirect()->route('software.index')->with('success', 'Software deleted successfully.');
+        return redirect()->route('software.index');
     }
 }
