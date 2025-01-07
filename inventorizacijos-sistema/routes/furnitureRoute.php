@@ -2,22 +2,25 @@
 
 use App\Http\Controllers\FurnitureController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
 
 /*Displaying the list of furniture */
+
 Route::get('/furniture', [FurnitureController::class, 'index'])->name('furniture.index');
 
-/*Creating and storing new furniture data */
-Route::get('/furniture/create', [FurnitureController::class, 'create'])->name('furniture.create');
-Route::post('/furniture/create', [FurnitureController::class, 'store'])->name('furniture.store');
 
-/*Displaying specified furniture data */
-Route::get('/furniture/view/{id}', [FurnitureController::class, 'show'])->name('furniture.show');
+Route::middleware(['auth', IsAdmin::class])->group(function () {
+    /*Creating and storing new furniture data */
+    Route::get('/furniture/create', [FurnitureController::class, 'create'])->name('furniture.create');
+    Route::post('/furniture/create', [FurnitureController::class, 'store'])->name('furniture.store');
 
-/*Editing and updating existing furniture data */
-Route::get('/furniture/edit/{furniture}', [FurnitureController::class, 'edit'])->name('furniture.edit');
-Route::post('/furniture/edit/{furniture}', [FurnitureController::class, 'update'])->name('furniture.update');
+    /*Displaying specified furniture data */
+    Route::get('/furniture/view/{id}', [FurnitureController::class, 'show'])->name('furniture.show');
 
-/*Deleting furniture data */
-// Route::get('/furniture/destroy/{id}', [FurnitureController::class, 'destroy'])->name('furniture.delete');
+    /*Editing and updating existing furniture data */
+    Route::get('/furniture/edit/{furniture}', [FurnitureController::class, 'edit'])->name('furniture.edit');
+    Route::post('/furniture/edit/{furniture}', [FurnitureController::class, 'update'])->name('furniture.update');
 
-Route::delete('/furniture/{furniture}', [FurnitureController::class, 'destroy'])->name('furniture.destroy');
+    /*Deleting furniture data */
+    Route::delete('/furniture/{furniture}', [FurnitureController::class, 'destroy'])->name('furniture.destroy');
+});

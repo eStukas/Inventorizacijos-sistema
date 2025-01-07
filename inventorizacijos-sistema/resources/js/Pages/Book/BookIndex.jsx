@@ -3,7 +3,8 @@ import React from "react";
 import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-const BookIndex = ({ books, userRole }) => {
+const BookIndex = ({ books, auth }) => {
+    const userRole = auth.user.role;
 
     const handleDelete = (id) => {
         if (confirm("Are you sure you want to delete this book?")) {
@@ -30,10 +31,7 @@ const BookIndex = ({ books, userRole }) => {
                     >
                         Add New Book
                     </Link>
-                )
-
-                }
-
+                )}
 
                 <table className="min-w-full table-auto bg-white border border-gray-200 rounded-md shadow-md">
                     <thead>
