@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             RoleSeeder::class,
             StatusSeeder::class,
-            SoftwareTypeSeeder::class
+            SoftwareTypeSeeder::class,
+            AdminSeeder::class
         ]);
     }
 }
