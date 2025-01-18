@@ -21,5 +21,6 @@ Route::middleware(['auth', IsAdmin::class])->group(function(){
     /*Deleting TV data */
     Route::delete('/tv-control/{tv}', [TVController::class, 'destroy'])->name('tv.delete');
     
-    Route::get('/tv-control/ping/{tv}', [TVController::class, 'ping'])->name('tv.ping');
 });    
+
+Route::get('/tv-control/ping/{tv}', [TVController::class, 'ping'])->name('tv.ping');

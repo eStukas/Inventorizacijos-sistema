@@ -31,7 +31,7 @@ class TVController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'ip_address' => 'required|string|max:255',
+            'ip_address' => 'required|unique:t_v_s|string|max:255',
             'last_ping' => 'nullable|date'
         ]);
 
@@ -61,7 +61,7 @@ class TVController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'ip_address' => 'required|string|max:255',
+            'ip_address' => 'required|unique:t_v_s|string|max:255',
             'last_ping' => 'nullable|date'
 
         ]);
