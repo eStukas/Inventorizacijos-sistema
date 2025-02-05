@@ -4,4 +4,6 @@
   EN
 ## About This Project
 
----Inventorization system for a IT focused school---
+---A prototype for an inventorization system for a IT focused school---
+
+Made using Laravel and React
